@@ -6,7 +6,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-typedef tree<pair<int, int>, null_type, less<pair<int, int>>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 
 int main()
 {
@@ -14,20 +14,19 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-
+    int n,inv = 0;
+    cin>>n;
+    int arr[n];
+    for(int i = 0; i<n;i++) cin>>arr[i];
     pbds st;
-    //value,index pair
-    st.insert({34, 1});
-    st.insert({34, 3});
-    st.insert({35, 2});
-    st.insert({3, 4});
 
-    for (int i = 0; i < st.size(); i++)
-    {
-        cout << i << " " << st.find_by_order(i)->first << " " << st.find_by_order(i)->second << "\n";
+    for(int i = 0; i < n;i++){
+       
+       inv +=st.size() - order_of_key(arr[i]);
+       st.insert(arr[i]);
     }
 
-    // cout << " " << st.order_of_key(5) << "\n";
+    cout<<inv;
 
     return 0;
 }
