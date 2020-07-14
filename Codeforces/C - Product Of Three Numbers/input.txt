@@ -1,4 +1,7 @@
-3
-batmobile
-apple
-batmanhjj
+7
+1 1 2 2 3 3 4 
+5
+10
+12
+15
+18
