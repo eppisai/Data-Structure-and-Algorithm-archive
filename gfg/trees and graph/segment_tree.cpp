@@ -63,6 +63,46 @@ int query(int *tree, int ss, int se, int qs, int qe, int index)
     return min(left, right);
 }
 
+void update(int *tree,int ss, int se,int i,int increment,int index){
+
+ // case where the i is out of bounds
+ if(i > se or i < ss){
+     return;
+ }
+
+ //leaf node
+ if(ss == se){
+     tree[index] += increment;
+     return;
+ }
+
+ //otherwise
+ int mid = (ss + se)/2;
+ update(tree, ss,mid, i,increment,2*index);
+ update(tree,mid+1,se,i,increment,2*index + 1);
+ tree[index] = min(tree[2*index], tree[2*index + 1]);
+
+}
+
+void updateRange(int *tree,int ss,int se,int l,int r,int inc,int i){
+
+    //out of bounds
+    if(l > se or r < ss) return;
+
+    //leaft node
+    if(ss == se){
+        tree[index] += inc;
+        return;
+    } 
+
+    //recursiv case
+    int mid = (ss + se)/2;
+    updateRange(tree,ss,mid,l,r,inc,2*index);
+    updateRange(tree,mid+1,se,l,r,inc, 2*index + 1);
+    tree[index] = min(tree[2*index],tree[2*index + 1]);
+    return;
+}
+
 int32_t main()
 {
     int a[] = {1, 3, 2, -5, 6, 4};
@@ -70,13 +110,18 @@ int32_t main()
     int *tree = new int[4 * n + 1];
     buildtree(a, 0, n - 1, tree, 1);
     //for(int i = 1; i <=13; i++) cout<<tree[i]<<" ";
-    int q;
-    cin >> q;
-    while (q--)
-    {
-        int l, r;
-        cout << query(tree, 0, n - 1, l, r, 1) << endl;
-    }
+    // int q;
+    // cin >> q;
+    // while (q--)
+    // {
+    //     int l, r;
+    //     cin>>l>>r;
+    //     cout << query(tree, 0, n - 1, l, r, 1) << endl;
+    // }
+    //update(tree,0,n,n-1,3,10,1);
+
+
+
 
     return 0;
 }
