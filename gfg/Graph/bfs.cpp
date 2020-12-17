@@ -39,10 +39,12 @@ class Graph{
 int main(){
    Graph<int> g;
    g.addedges(0,1);
+   g.addedges(0,3);
    g.addedges(1,2);
    g.addedges(2,3);
-   g.addedges(3,4);
+   g.addedges(3,4); 
    g.addedges(4,5); 
+
 
    g.bfs(0);
 

@@ -24,7 +24,7 @@ class Graph{
             dist[node] = INT_MAX;
             
         }
-
+        visited[src] = true;
         q.push(src);
         dist[src] = 0;
 
@@ -39,8 +39,16 @@ class Graph{
                     q.push(nbr);
                     //mark that nbr as visited
                     dist[nbr] = dist[node] + 1;
+                    visited[nbr] = true;
                 }
             }
+        }
+
+        //print the dist to every node
+        for(auto node_pair:l){
+            T node = node_pair.first;
+            int d = dist[node];
+            cout<<"Node "<<node<<" D from src "<<d<<endl;
         }
       }
 };
@@ -48,9 +56,10 @@ class Graph{
 int main(){
    Graph<int> g;
    g.addedges(0,1);
+   g.addedges(0,3);
    g.addedges(1,2);
    g.addedges(2,3);
-   g.addedges(3,4);
+   g.addedges(3,4); 
    g.addedges(4,5); 
 
    g.bfs(0);
