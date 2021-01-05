@@ -29,14 +29,22 @@ const int MN = 2e5+7;
 //array of vectors
 vector<int> v[MN];
 
+int dp[7][8] = {0};
+
 int lcs(string x,string y,int lx,int ly){
    
    //base case
    if(lx <= 0 or ly <= 0) return 0;
+
    if(x[lx - 1] == y[ly - 1]){
-       return (lcs(x,y,lx-1,ly-1) + 1);
+       if(dp[lx-1][ly-1] == 0)
+       return dp[lx][ly] = (lcs(x,y,lx-1,ly-1) + 1);
+       else
+       return dp[lx][ly] = (dp[lx - 1][ly - 1] + 1);
    }
-   return max(lcs(x,y,lx,ly-1),lcs(x,y,lx-1,ly));
+   if(dp[lx][ly - 1] == 0) dp[lx][ly-1] = lcs(x,y,lx,ly-1);
+   if(dp[lx - 1][ly] == 0) dp[lx - 1][ly] = lcs(x,y,lx-1,ly);
+   return dp[lx][ly] = max(dp[lx][ly-1], dp[lx - 1][ly]);
 
 }
 
